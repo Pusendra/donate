@@ -84,7 +84,7 @@ const Login = () => {
             position: toast.POSITION.TOP_RIGHT
           });
           setLoginValues({ email: '', password: '' });
-          history.push('/profile');
+          history.push('/profile/products');
         }
       })
       .catch((err) => {
