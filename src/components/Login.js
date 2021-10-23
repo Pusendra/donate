@@ -76,7 +76,8 @@ const Login = () => {
           // });
           setData({
             id: res.data.id,
-            typeName: res.data.typeName
+            typeName: res.data.typeName,
+            firstName: res.data.firstName
           });
 
           toast.success('User Successfully Logged In', {

@@ -72,7 +72,7 @@ const Profile = () => {
               aria-hidden="true"
               style={{ fontSize: '50px' }}
             ></i>
-            <h4>Elias</h4>
+            <h4>{data.firstName || 'Anonyms'}</h4>
           </div>
           <ul>
             <li
@@ -82,7 +82,11 @@ const Profile = () => {
               onClick={handleProducts}
             >
               <i className="fa fa-desktop" aria-hidden="true"></i>
-              <span>Products</span>
+              {data.typeName === 'user' ? (
+                <span>My Products</span>
+              ) : (
+                <span>All Products</span>
+              )}
             </li>
             <li
               className={`profile-list ${
