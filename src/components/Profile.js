@@ -3,10 +3,13 @@ import '../css/profile.css';
 import { Link } from 'react-router-dom';
 import { useLoginContext } from '../Contexts/loginContext';
 import MainContent from './mainContent';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import EditProfile from './EditProfile';
 
 const Profile = () => {
   let history = useHistory();
+  const { submenu } = useParams();
+  console.log('🚀 ~ file: Profile.js ~ line 12 ~ Profile ~ submenu', submenu);
 
   const { data } = useLoginContext();
   const [products, setProducts] = useState(true);
@@ -78,7 +81,7 @@ const Profile = () => {
             <h4>{data.firstName || 'Anonyms'}</h4>
           </div>
           <ul>
-            <Link to="/profile/products">
+            <Link to={`/profile/products`}>
               <li
                 className={`profile-list ${
                   products && 'profile-active-background'
@@ -146,7 +149,7 @@ const Profile = () => {
         <section className="section-1">
           {products && <MainContent showCart={false} />}
           {category && <p>Category</p>}
-          {settings && <p>Settings</p>}
+          {settings && <EditProfile />}
           {about && <p>About</p>}
           {subCategory && <p>Sub Category</p>}
         </section>

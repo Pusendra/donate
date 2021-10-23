@@ -102,14 +102,15 @@ const Login = () => {
         id="login-container"
       >
         <div className="form-login-container sing-up-login-container">
-          <form onSubmit={handleSubmit}>
-            <h1>Create Account</h1>
+          <form className="form" onSubmit={handleSubmit}>
+            <h2>Create Account</h2>
             <input
               type="text"
               placeholder="First Name"
               name="firstName"
               onChange={handleChange}
               value={formValues.firstName}
+              className="input"
             />
             <input
               type="text"
@@ -117,6 +118,7 @@ const Login = () => {
               name="lastName"
               onChange={handleChange}
               value={formValues.lastName}
+              className="input"
             />
             <input
               type="email"
@@ -124,6 +126,7 @@ const Login = () => {
               name="email"
               onChange={handleChange}
               value={formValues.email}
+              className="input"
             />
             <input
               type="number"
@@ -132,6 +135,7 @@ const Login = () => {
               onChange={handleChange}
               value={formValues.mobile}
               minlength="10"
+              className="input"
             />
             <input
               type="text"
@@ -139,6 +143,7 @@ const Login = () => {
               name="address"
               onChange={handleChange}
               value={formValues.address}
+              className="input"
             />
             <input
               type="password"
@@ -146,12 +151,13 @@ const Login = () => {
               name="password"
               onChange={handleChange}
               value={formValues.password}
+              className="input"
             />
             <button type="submit">Sign Up</button>
           </form>
         </div>
         <div className="form-login-container sing-in-login-container">
-          <form onSubmit={handleSignInSubmit}>
+          <form className="form" onSubmit={handleSignInSubmit}>
             <h1>Sign In</h1>
             <input
               type="email"
@@ -159,6 +165,7 @@ const Login = () => {
               value={loginValues?.email}
               name="email"
               onChange={handleChangeSignIn}
+              className="input"
             />
             <input
               type="password"
@@ -166,6 +173,7 @@ const Login = () => {
               value={loginValues?.password}
               name="password"
               onChange={handleChangeSignIn}
+              className="input"
             />
             <button type="submit">Sign In</button>
           </form>

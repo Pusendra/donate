@@ -1,7 +1,8 @@
 export const REGISTERATION = "/registration";
 export const LOGIN = "/login";
-export const USERS = "/users";
-export const UPDATE_USER = "/updateUser/{userId}";
+export const GET_USERS = "/users";
+export const GET_USER_PROFILE= "/user/profile/"
+export const UPDATE_USER = "/updateUser/";
 export const DELETE_USER = "/delete/user/{userId}";
 export const ADD_PRODUCT = "/addProduct";
 export const GET_PRODUCTS = "/getProducts";
