@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getProducts } from '../services/Services';
 
-const MainContent = () => {
+const MainContent = ({ showCart }) => {
   console.log(product_card);
   let history = useHistory();
 
@@ -36,9 +36,14 @@ const MainContent = () => {
           <span>{item.currency}</span>
         </p>
       </div>
-      <div className="btn" style={{ marginTop: '-15px', marginBottom: '20px' }}>
-        Add to cart
-      </div>
+      {showCart && (
+        <div
+          className="btn"
+          style={{ marginTop: '-15px', marginBottom: '20px' }}
+        >
+          Add to cart
+        </div>
+      )}
     </div>
   ));
   return (
