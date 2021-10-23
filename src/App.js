@@ -26,7 +26,7 @@ function App() {
             <Login />
           </Route>
           <Protected exact path="/profile/:submenu" component={Profile} />
-          <Route exact path="/product/description">
+          <Route exact path="/product/description/:id">
             <ProductDetails />
           </Route>
           <Route>

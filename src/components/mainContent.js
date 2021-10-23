@@ -1,54 +1,69 @@
-import React, { useEffect } from 'react';
-import product_card from '../data/product_data';
+import React, { useEffect, useState } from 'react';
+// import product_card from '../data/product_data';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getProducts } from '../services/Services';
 
-const MainContent = ({ showCart }) => {
+const MainContent = ({ showCart, productsByUser, path }) => {
+  const [product_card, setProducts] = useState([]);
   console.log(product_card);
   let history = useHistory();
 
-  const handleProductDetails = () => {
-    history.push('/product/description');
+  const handleProductDetails = (item) => {
+    history.push({
+      pathname: `/product/description/${item.productID}`,
+      state: item
+    });
   };
 
   const getAllProducts = async () => {
     const data = await getProducts();
-    console.log(
-      '🚀 ~ file: mainContent.js ~ line 18 ~ getAllProducts ~ data',
-      data
-    );
+    setProducts(data.data);
   };
 
   useEffect(() => {
     getAllProducts();
   }, []);
-  const listItems = product_card.map((item) => (
-    <div className="card" key={item.id}>
-      <div className="card_img">
-        <img src={item.thumb} alt="data" />
-      </div>
-      <div className="card_header" onClick={handleProductDetails}>
-        <h2>{item.product_name}</h2>
-        <p>{item.description}</p>
-        <p className="price">
-          {item.price}
-          <span>{item.currency}</span>
-        </p>
-      </div>
-      {showCart && (
-        <div
-          className="btn"
-          style={{ marginTop: '-15px', marginBottom: '20px' }}
-        >
-          Add to cart
-        </div>
-      )}
-    </div>
-  ));
+
+  const selectedData =
+    path === '/profile/products' && productsByUser.length > 0
+      ? productsByUser
+      : product_card;
+
+  const listItems =
+    path === '/profile/products' && productsByUser.length === 0
+      ? 'No Data Found'
+      : selectedData?.map((item) => (
+          <div className="card" key={item?.id || item?.productID}>
+            <div
+              className="card_img"
+              onClick={() => handleProductDetails(item)}
+            >
+              <img src={item.productImage} alt="data" />
+            </div>
+            <div
+              className="card_header"
+              onClick={() => handleProductDetails(item)}
+            >
+              <h2>{item.productName}</h2>
+              <p>{item.description}</p>
+              <p className="price">
+                <span>Rs</span> {item.productPrice}
+              </p>
+            </div>
+            {showCart && (
+              <div
+                className="btn"
+                style={{ marginTop: '-15px', marginBottom: '20px' }}
+              >
+                Add to cart
+              </div>
+            )}
+          </div>
+        ));
   return (
     <div className="main_content">
-      <h3>Headphones</h3>
+      <h3>{product_card[0]?.categoryName}</h3>
       {listItems}
     </div>
   );

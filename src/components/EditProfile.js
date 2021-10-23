@@ -17,7 +17,12 @@ const EditProfile = () => {
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
-    updateUserProfile(data?.id)
+    if (Object.keys(updatedData).length === 0) {
+      return toast.error('Please Edit Data To Update Profile', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
+    updateUserProfile(data?.id, updatedData)
       .then((res) =>
         toast.success('User Details updated Successfully.', {
           position: toast.POSITION.TOP_RIGHT
@@ -40,12 +45,12 @@ const EditProfile = () => {
   }, []);
 
   return (
-    <form class="my-form" onSubmit={handleUpdateProfile}>
-      <div class="edit-container">
+    <form className="my-form" onSubmit={handleUpdateProfile}>
+      <div className="edit-container">
         <h1>Edit Profile</h1>
         <ul>
           <li>
-            <div class="grid grid-2">
+            <div className="grid grid-2">
               <div>
                 <label for="firstName">First Name</label>
                 <input
@@ -69,7 +74,7 @@ const EditProfile = () => {
             </div>
           </li>
           <li>
-            <div class="grid grid-2">
+            <div className="grid grid-2">
               <div>
                 <label for="email">Email</label>
                 <input
@@ -104,17 +109,17 @@ const EditProfile = () => {
           </li>
 
           <li>
-            <div class="grid grid-3">
-              <div class="required-msg"></div>
+            <div className="grid grid-3">
+              <div className="required-msg"></div>
               <div></div>
-              <button class="btn-grid" type="submit">
-                <span class="back">
+              <button className="btn-grid" type="submit">
+                <span className="back">
                   <img
                     src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/email-icon.svg"
                     alt=""
                   />
                 </span>
-                <span class="front">SUBMIT</span>
+                <span className="front">SUBMIT</span>
               </button>
             </div>
           </li>

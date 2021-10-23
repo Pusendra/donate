@@ -6,6 +6,7 @@ export const UPDATE_USER = "/updateUser/";
 export const DELETE_USER = "/delete/user/{userId}";
 export const ADD_PRODUCT = "/addProduct";
 export const GET_PRODUCTS = "/getProducts";
+export const GET_PRODUCTS_BY_USER = "/users/products/"
 export const SUB_CATEGORY = "/subCategory/products/{subCatId}";
 export const INDIVIDUAL_USER_PROJECTS = "/users/products/{userId}";
 export const UPDATE_PRODUCT = "/updateProduct/{productId}";

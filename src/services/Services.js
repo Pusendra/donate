@@ -1,6 +1,7 @@
 import axios from '../config/axiosInstance';
 import {
   GET_PRODUCTS,
+  GET_PRODUCTS_BY_USER,
   GET_USERS,
   GET_USER_PROFILE,
   LOGIN,
@@ -20,6 +21,10 @@ export const getProducts = () => {
   return axios.get(GET_PRODUCTS);
 };
 
+export const getProductsByUser = (id) => {
+  return axios.get(GET_PRODUCTS_BY_USER + id);
+};
+
 export const getUsers = () => {
   return axios.get(GET_USERS);
 };
@@ -28,6 +33,6 @@ export const getUserProfile = (id) => {
   return axios.get(GET_USER_PROFILE + id);
 };
 
-export const updateUserProfile = (id) => {
-  return axios.get(UPDATE_USER + id);
+export const updateUserProfile = (id, data) => {
+  return axios.put(UPDATE_USER + id, data);
 };

@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/profile.css';
 import { Link } from 'react-router-dom';
 import { useLoginContext } from '../Contexts/loginContext';
 import MainContent from './mainContent';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import EditProfile from './EditProfile';
+import { getProductsByUser } from '../services/Services';
 
 const Profile = () => {
   let history = useHistory();
-  const { submenu } = useParams();
-  console.log('🚀 ~ file: Profile.js ~ line 12 ~ Profile ~ submenu', submenu);
-
   const { data } = useLoginContext();
-  const [products, setProducts] = useState(true);
-  const [category, setCategory] = useState(false);
-  const [subCategory, setSubCategory] = useState(false);
-  const [settings, setSettings] = useState(false);
-  const [about, setAbout] = useState(false);
+  const [productsByUser, setProductsData] = useState(true);
+  const [products, setProducts] = useState(
+    history.location.pathname === '/profile/products'
+  );
+  const [addProducts, setAddProducts] = useState(
+    history.location.pathname === '/profile/add-products'
+  );
+  const [category, setCategory] = useState(
+    history.location.pathname === '/profile/category'
+  );
+  const [subCategory, setSubCategory] = useState(
+    history.location.pathname === '/profile/subcategory'
+  );
+  const [settings, setSettings] = useState(
+    history.location.pathname === '/profile/settings'
+  );
+  const [about, setAbout] = useState(
+    history.location.pathname === '/profile/about'
+  );
 
   const handleProducts = () => {
     setProducts(true);
+    setAddProducts(false);
+    setCategory(false);
+    setSubCategory(false);
+    setSettings(false);
+    setAbout(false);
+  };
+  const handleAddProducts = () => {
+    setProducts(false);
+    setAddProducts(true);
     setCategory(false);
     setSubCategory(false);
     setSettings(false);
@@ -28,6 +49,7 @@ const Profile = () => {
 
   const handleCategory = () => {
     setProducts(false);
+    setAddProducts(false);
     setCategory(true);
     setSubCategory(false);
     setSettings(false);
@@ -36,6 +58,7 @@ const Profile = () => {
 
   const handleSubCategory = () => {
     setProducts(false);
+    setAddProducts(false);
     setCategory(false);
     setSubCategory(true);
     setSettings(false);
@@ -44,6 +67,7 @@ const Profile = () => {
 
   const handleSettings = () => {
     setProducts(false);
+    setAddProducts(false);
     setCategory(false);
     setSubCategory(false);
     setSettings(true);
@@ -52,11 +76,21 @@ const Profile = () => {
 
   const handleAbout = () => {
     setProducts(false);
+    setAddProducts(false);
     setCategory(false);
     setSubCategory(false);
     setSettings(false);
     setAbout(true);
   };
+
+  const getAllProductsByUser = async () => {
+    const d = await getProductsByUser(data?.id);
+    setProductsData(d.data);
+  };
+
+  useEffect(() => {
+    getAllProductsByUser();
+  }, []);
 
   return (
     <>
@@ -64,7 +98,7 @@ const Profile = () => {
       <header className="header-profile">
         <h2 className="u-name">
           Profile <b>Details</b>
-          <label for="checkbox">
+          <label htmlFor="checkbox">
             <i id="navbtn" className="fa fa-bars" aria-hidden="true"></i>
           </label>
         </h2>
@@ -94,6 +128,18 @@ const Profile = () => {
                 ) : (
                   <span>All Products</span>
                 )}
+              </li>
+            </Link>
+            <Link to={`/profile/add-products`}>
+              <li
+                className={`profile-list ${
+                  addProducts && 'profile-active-background'
+                } `}
+                onClick={handleAddProducts}
+              >
+                <i className="fa fa-desktop" aria-hidden="true"></i>
+
+                <span>Add Products</span>
               </li>
             </Link>
             <Link to="/profile/category">
@@ -147,7 +193,14 @@ const Profile = () => {
           </ul>
         </nav>
         <section className="section-1">
-          {products && <MainContent showCart={false} />}
+          {products && (
+            <MainContent
+              showCart={false}
+              productsByUser={productsByUser}
+              path="/profile/products"
+            />
+          )}
+          {addProducts && <p>Add Products</p>}
           {category && <p>Category</p>}
           {settings && <EditProfile />}
           {about && <p>About</p>}
