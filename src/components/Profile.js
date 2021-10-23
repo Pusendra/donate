@@ -6,6 +6,7 @@ import MainContent from './mainContent';
 import { useHistory } from 'react-router-dom';
 import EditProfile from './EditProfile';
 import { getProductsByUser } from '../services/Services';
+import Category from './Category';
 
 const Profile = () => {
   let history = useHistory();
@@ -201,7 +202,7 @@ const Profile = () => {
             />
           )}
           {addProducts && <p>Add Products</p>}
-          {category && <p>Category</p>}
+          {category && <Category />}
           {settings && <EditProfile />}
           {about && <p>About</p>}
           {subCategory && <p>Sub Category</p>}

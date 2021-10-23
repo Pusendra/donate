@@ -52,7 +52,7 @@ const EditProfile = () => {
           <li>
             <div className="grid grid-2">
               <div>
-                <label for="firstName">First Name</label>
+                <label htmlFor="firstName">First Name</label>
                 <input
                   type="text"
                   placeholder="First Name"
@@ -62,7 +62,7 @@ const EditProfile = () => {
                 />
               </div>
               <div>
-                <label for="lastName">Last Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <input
                   type="text"
                   placeholder="Last Name"
@@ -76,7 +76,7 @@ const EditProfile = () => {
           <li>
             <div className="grid grid-2">
               <div>
-                <label for="email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   placeholder="Email"
@@ -86,7 +86,7 @@ const EditProfile = () => {
                 />
               </div>
               <div>
-                <label for="phone">Mobile</label>
+                <label htmlFor="phone">Mobile</label>
                 <input
                   type="tel"
                   placeholder="Mobile"
@@ -98,7 +98,7 @@ const EditProfile = () => {
             </div>
           </li>
           <li>
-            <label for="address">Address</label>
+            <label htmlFor="address">Address</label>
             <input
               type="text"
               placeholder="Address"
