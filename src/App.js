@@ -12,10 +12,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { LoginContextProvider } from './Contexts/loginContext';
 import Protected from './config/Protected';
 import Error404 from './components/Error404';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 function App() {
   return (
-    <div className="container">
+    <div className="products-container">
       <LoginContextProvider>
         <ToastContainer />
         <Header />

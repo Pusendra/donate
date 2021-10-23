@@ -8,6 +8,7 @@ import EditProfile from './EditProfile';
 import { getProductsByUser } from '../services/Services';
 import Category from './Category';
 import AddProducts from './AddProducts';
+import ModalExample from './Modal';
 
 const Profile = () => {
   let history = useHistory();
@@ -205,7 +206,7 @@ const Profile = () => {
           {addProducts && <AddProducts />}
           {category && <Category />}
           {settings && <EditProfile />}
-          {about && <p>About</p>}
+          {about && <p><ModalExample/></p>}
           {subCategory && <p>Sub Category</p>}
         </section>
       </div>
