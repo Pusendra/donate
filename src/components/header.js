@@ -20,7 +20,7 @@ export default function Header() {
         <li>About Us</li>
         <li>Contact</li>
         {data?.id && (
-          <Link to="/profile">
+          <Link to="/profile/products">
             <li>Profile</li>
           </Link>
         )}

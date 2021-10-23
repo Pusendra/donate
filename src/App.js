@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/login-signup">
             <Login />
           </Route>
-          <Protected exact path="/profile" component={Profile} />
+          <Protected exact path="/profile/:submenu" component={Profile} />
           <Route exact path="/product/description">
             <ProductDetails />
           </Route>

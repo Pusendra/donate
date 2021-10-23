@@ -3,8 +3,11 @@ import '../css/profile.css';
 import { Link } from 'react-router-dom';
 import { useLoginContext } from '../Contexts/loginContext';
 import MainContent from './mainContent';
+import { useHistory } from 'react-router-dom';
 
 const Profile = () => {
+  let history = useHistory();
+
   const { data } = useLoginContext();
   const [products, setProducts] = useState(true);
   const [category, setCategory] = useState(false);
@@ -75,55 +78,65 @@ const Profile = () => {
             <h4>{data.firstName || 'Anonyms'}</h4>
           </div>
           <ul>
-            <li
-              className={`profile-list ${
-                products && 'profile-active-background'
-              } `}
-              onClick={handleProducts}
-            >
-              <i className="fa fa-desktop" aria-hidden="true"></i>
-              {data.typeName === 'user' ? (
-                <span>My Products</span>
-              ) : (
-                <span>All Products</span>
-              )}
-            </li>
-            <li
-              className={`profile-list ${
-                category && 'profile-active-background'
-              } `}
-              onClick={handleCategory}
-            >
-              <i className="fa fa-envelope-o" aria-hidden="true"></i>
-              <span>Categories</span>
-            </li>
-            <li
-              className={`profile-list ${
-                subCategory && 'profile-active-background'
-              } `}
-              onClick={handleSubCategory}
-            >
-              <i className="fa fa-comment-o" aria-hidden="true"></i>
-              <span>Sub Category</span>
-            </li>
-            <li
-              className={`profile-list ${
-                about && 'profile-active-background'
-              } `}
-              onClick={handleAbout}
-            >
-              <i className="fa fa-info-circle" aria-hidden="true"></i>
-              <span>About</span>
-            </li>
-            <li
-              className={`profile-list ${
-                settings && 'profile-active-background'
-              } `}
-              onClick={handleSettings}
-            >
-              <i className="fa fa-cog" aria-hidden="true"></i>
-              <span>Setting</span>
-            </li>
+            <Link to="/profile/products">
+              <li
+                className={`profile-list ${
+                  products && 'profile-active-background'
+                } `}
+                onClick={handleProducts}
+              >
+                <i className="fa fa-desktop" aria-hidden="true"></i>
+                {data.typeName === 'user' ? (
+                  <span>My Products</span>
+                ) : (
+                  <span>All Products</span>
+                )}
+              </li>
+            </Link>
+            <Link to="/profile/category">
+              <li
+                className={`profile-list ${
+                  category && 'profile-active-background'
+                } `}
+                onClick={handleCategory}
+              >
+                <i className="fa fa-envelope-o" aria-hidden="true"></i>
+                <span>Categories</span>
+              </li>
+            </Link>
+            <Link to="/profile/subcategory">
+              <li
+                className={`profile-list ${
+                  subCategory && 'profile-active-background'
+                } `}
+                onClick={handleSubCategory}
+              >
+                <i className="fa fa-comment-o" aria-hidden="true"></i>
+                <span>Sub Category</span>
+              </li>
+            </Link>
+            <Link to="/profile/about">
+              <li
+                className={`profile-list ${
+                  about && 'profile-active-background'
+                } `}
+                onClick={handleAbout}
+              >
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
+                <span>About</span>
+              </li>
+            </Link>
+            <Link to="/profile/settings">
+              <li
+                className={`profile-list ${
+                  settings && 'profile-active-background'
+                } `}
+                onClick={handleSettings}
+              >
+                <i className="fa fa-cog" aria-hidden="true"></i>
+                <span>Setting</span>
+              </li>
+            </Link>
             <li className="profile-list">
               <i className="fa fa-power-off" aria-hidden="true"></i>
               <span>Logout</span>
