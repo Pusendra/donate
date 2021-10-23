@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import EditProfile from './EditProfile';
 import { getProductsByUser } from '../services/Services';
 import Category from './Category';
+import AddProducts from './AddProducts';
 
 const Profile = () => {
   let history = useHistory();
@@ -201,7 +202,7 @@ const Profile = () => {
               path="/profile/products"
             />
           )}
-          {addProducts && <p>Add Products</p>}
+          {addProducts && <AddProducts />}
           {category && <Category />}
           {settings && <EditProfile />}
           {about && <p>About</p>}
