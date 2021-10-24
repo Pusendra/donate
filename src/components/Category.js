@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'reactstrap';
 import { getCategory } from '../services/Services';
 import AddCategoryModel from './AddCategoryModal';
+import EditModal from './EditModal';
 
 const Category = () => {
   const [list_category, setProducts] = useState([]);
   const [addCategorySucess, setCategorySucess] = useState(false);
 
-  console.log(list_category);
+  const [modal, setModal] = useState(false);
+  const [editDataCategory, setDataEditCategory] = useState({});
 
+  const toggle = () => setModal(!modal);
   const getAllCategory = async () => {
     const data = await getCategory();
     setProducts(data.data);
@@ -20,7 +23,18 @@ const Category = () => {
 
   return (
     <>
-      <AddCategoryModel setCategorySucess={setCategorySucess} />
+      <AddCategoryModel
+        setCategorySucess={setCategorySucess}
+        addCategorySucess={addCategorySucess}
+      />
+      <EditModal
+        className="edit-Modal"
+        modal={modal}
+        toggle={toggle}
+        editDataCategory={editDataCategory}
+        setCategorySucess={setCategorySucess}
+        addCategorySucess={addCategorySucess}
+      />
       <Table bordered variant="dark">
         <thead>
           <tr>
@@ -41,7 +55,14 @@ const Category = () => {
                   justifyContent: 'space-evenly'
                 }}
               >
-                <i class="fa fa-trash"></i> <i class="fa fa-pencil"></i>
+                <i class="fa fa-trash"></i>{' '}
+                <i
+                  class="fa fa-pencil"
+                  onClick={() => {
+                    toggle();
+                    setDataEditCategory(category);
+                  }}
+                ></i>
               </td>
             </tr>
           ))}

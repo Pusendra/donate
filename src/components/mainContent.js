@@ -35,6 +35,9 @@ const MainContent = ({ showCart, productsByUser, path }) => {
       ? 'No Data Found'
       : selectedData?.map((item) => (
           <div className="card" key={item?.id || item?.productID}>
+            <div style={{ color: '#fe8033', position: 'absolute', zIndex: 100 }}>
+              <i class="fa fa-pencil"></i>
+            </div>
             <div
               className="card_img"
               onClick={() => handleProductDetails(item)}

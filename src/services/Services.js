@@ -10,7 +10,9 @@ import {
   REGISTERATION,
   UPDATE_USER,
   GET_CATEGORY,
-  GET_SUB_CATEGORY_BY_CATEGORY_ID
+  GET_SUB_CATEGORY_BY_CATEGORY_ID,
+  UPDATE_CATEGORY,
+  UPDATE_PRODUCT
 } from '../constants/URLS.CONSTANT';
 
 export const registerUser = (data) => {
@@ -31,6 +33,14 @@ export const addProducts = (data) => {
 
 export const addCategory = (data) => {
   return axios.post(ADD_CATEGORY, data);
+};
+
+export const updateProduct = (id, data) => {
+  return axios.post(UPDATE_PRODUCT + id, data);
+};
+
+export const updateCategory = (id, data) => {
+  return axios.put(UPDATE_CATEGORY + id, data);
 };
 
 export const getProductsByUser = (id) => {
