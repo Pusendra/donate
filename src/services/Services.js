@@ -37,7 +37,7 @@ export const addCategory = (data) => {
 };
 
 export const updateProduct = (id, data) => {
-  return axios.post(UPDATE_PRODUCT + id, data);
+  return axios.put(UPDATE_PRODUCT + id, data);
 };
 
 export const updateCategory = (id, data) => {

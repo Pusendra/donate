@@ -38,7 +38,7 @@ const AddProducts = () => {
   }, []);
 
   const getSubCategoryByCatgoryId = async () => {
-    const data = await getCategoryBySubCategoryId(getCategoryId.categoryId);
+    const data = await getCategoryBySubCategoryId(getCategoryId?.categoryId);
     setSubCategory(data.data);
   };
 

@@ -25,7 +25,9 @@ export default function Header() {
           </Link>
         )}
         {data?.id ? (
-          <LogOut />
+          <li style={{ cursor: 'pointer' }}>
+            <LogOut />
+          </li>
         ) : (
           <Link to="/login-signup">
             <li>Login/SignUp</li>

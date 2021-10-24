@@ -11,8 +11,7 @@ const LogOut = () => {
     setData({});
     history.push('/');
   };
-  return <li onClick={logOut}>LogOut</li>;
+  return <span onClick={logOut}>LogOut</span>;
 };
 
 export default LogOut;
-

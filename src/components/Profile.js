@@ -10,6 +10,7 @@ import Category from './Category';
 import SubCategory from './SubCategory';
 import AddProducts from './AddProducts';
 import AddCategoryModel from './AddCategoryModal';
+import LogOut from './LogOut';
 
 const Profile = () => {
   let history = useHistory();
@@ -192,7 +193,7 @@ const Profile = () => {
             </Link>
             <li className="profile-list">
               <i className="fa fa-power-off" aria-hidden="true"></i>
-              <span>Logout</span>
+              <LogOut />
             </li>
           </ul>
         </nav>
