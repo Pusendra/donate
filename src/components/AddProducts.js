@@ -46,10 +46,6 @@ const AddProducts = () => {
     getSubCategoryByCatgoryId();
   }, [getCategoryId]);
 
-  console.log(list_sub_category);
-
-  console.log(getCategoryId);
-
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     const formData = new FormData();

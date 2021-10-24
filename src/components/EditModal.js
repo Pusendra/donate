@@ -1,29 +1,38 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import '../css/editProfile.css';
-import { addCategory } from '../services/Services';
+import { addCategory, updateCategory } from '../services/Services';
 import { useHistory, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-const AddCategoryModel = (props) => {
-  let history = useHistory();
+const EditModal = (props) => {
+  const {
+    modal,
+    toggle,
+    editDataCategory,
+    setCategorySucess,
+    addCategorySucess
+  } = props;
+
   const [getCategory, setCategoryData] = useState({
     categoryName: '',
     categoryCode: ''
   });
 
-  const handleCategory = (e) => {
+  const handleUpdateCategory = (e) => {
     e.preventDefault();
-    addCategory(getCategory)
+    updateCategory(editDataCategory?.categoryId, {
+      categoryName: getCategory.categoryName
+        ? getCategory.categoryName
+        : editDataCategory?.categoryName,
+      categoryCode: getCategory.categoryCode
+        ? getCategory.categoryCode
+        : editDataCategory?.categoryCode
+    })
       .then((res) => {
-        toast.success(res.statusMessage || 'Category Added Successfully', {
+        toast.success(res.statusMessage || 'Category Updated Successfully', {
           position: toast.POSITION.TOP_RIGHT
         });
-        props.setCategorySucess(!props?.addCategorySucess);
-        setCategoryData({
-          categoryName: '',
-          categoryCode: ''
-        });
-        history.push('/profile/category');
+        setCategorySucess(!addCategorySucess);
       })
       .catch((err) => {
         toast.error('Could Not Add Category', {
@@ -37,27 +46,14 @@ const AddCategoryModel = (props) => {
     setCategoryData({ ...getCategory, [name]: value });
   };
 
-  const { buttonLabel, className } = props;
-
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-
-  console.log(className);
+  const { className } = props;
 
   return (
     <div>
-      <Button
-        color="danger"
-        onClick={toggle}
-        style={{ display: 'flex', margin: '20px' }}
-      >
-        {buttonLabel}Add
-      </Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Add Category</ModalHeader>
+        <ModalHeader toggle={toggle}>Edit Category</ModalHeader>
         <ModalBody>
-          <form className="my-form" onSubmit={handleCategory}>
+          <form className="my-form" onSubmit={handleUpdateCategory}>
             <div className="edit-container">
               <ul>
                 <li>
@@ -70,7 +66,7 @@ const AddCategoryModel = (props) => {
                         onChange={handleDataChange}
                         name="categoryName"
                         required
-                        value={getCategory.productName}
+                        defaultValue={editDataCategory.categoryName}
                       />
                     </div>
                     <div>
@@ -81,7 +77,7 @@ const AddCategoryModel = (props) => {
                         onChange={handleDataChange}
                         required
                         name="categoryCode"
-                        value={getCategory.subCategoryId}
+                        defaultValue={editDataCategory.categoryCode}
                       />
                     </div>
                   </div>
@@ -108,4 +104,4 @@ const AddCategoryModel = (props) => {
   );
 };
 
-export default AddCategoryModel;
+export default EditModal;
