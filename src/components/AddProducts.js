@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useLoginContext } from '../Contexts/loginContext';
 import '../css/editProfile.css';
-import { addProducts } from '../services/Services';
+import {
+  addProducts,
+  getCategory,
+  getCategoryBySubCategoryId
+} from '../services/Services';
 import { useHistory, Redirect } from 'react-router-dom';
 
 const AddProducts = () => {
@@ -10,6 +14,8 @@ const AddProducts = () => {
 
   const { data } = useLoginContext();
   const [selectedFile, setSelectedFile] = useState(null);
+  const [list_category, setCategory] = useState([]);
+  const [list_sub_category, setSubCategory] = useState([]);
   const [productData, setProductData] = useState({
     productName: '',
     subCategoryId: '',
@@ -18,6 +24,26 @@ const AddProducts = () => {
     description: '',
     userId: data?.id
   });
+
+  const getAllCategory = async () => {
+    const data = await getCategory();
+    setCategory(data.data);
+  };
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
+
+  const getSubCategoryByCatgoryId = async () => {
+    const data = await getCategoryBySubCategoryId(1);
+    setSubCategory(data.data);
+  };
+
+  useEffect(() => {
+    getSubCategoryByCatgoryId();
+  }, []);
+
+  console.log(list_sub_category);
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
@@ -38,7 +64,7 @@ const AddProducts = () => {
           description: '',
           userId: data?.id
         });
-        history.push('/profile/products')
+        history.push('/profile/products');
       })
       .catch((err) => {
         toast.error('Could Not Add Product', {
@@ -79,8 +105,35 @@ const AddProducts = () => {
                   value={productData.subCategoryId}
                 />
               </div>
+              list_category
             </div>
           </li>
+
+          <li>
+            <div className="grid grid-2">
+              <div>
+                <label htmlFor="category">Category</label>
+                <select onChange={handleDataChange} name="category">
+                  {list_category.map((category, i) => (
+                    <option key={i} value={category.categoryId}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="phone">Product Price</label>
+                <input
+                  type="text"
+                  placeholder="Enter Product Price"
+                  onChange={handleDataChange}
+                  name="productPrice"
+                  value={productData.productPrice}
+                />
+              </div>
+            </div>
+          </li>
+
           <li>
             <div className="grid grid-2">
               <div>

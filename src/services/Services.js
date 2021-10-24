@@ -1,13 +1,16 @@
 import axios from '../config/axiosInstance';
 import {
   ADD_PRODUCT,
+  ADD_CATEGORY,
   GET_PRODUCTS,
   GET_PRODUCTS_BY_USER,
   GET_USERS,
   GET_USER_PROFILE,
   LOGIN,
   REGISTERATION,
-  UPDATE_USER
+  UPDATE_USER,
+  GET_CATEGORY,
+  GET_SUB_CATEGORY_BY_CATEGORY_ID
 } from '../constants/URLS.CONSTANT';
 
 export const registerUser = (data) => {
@@ -26,6 +29,10 @@ export const addProducts = (data) => {
   return axios.post(ADD_PRODUCT, data);
 };
 
+export const addCategory = (data) => {
+  return axios.post(ADD_CATEGORY, data);
+};
+
 export const getProductsByUser = (id) => {
   return axios.get(GET_PRODUCTS_BY_USER + id);
 };
@@ -40,4 +47,12 @@ export const getUserProfile = (id) => {
 
 export const updateUserProfile = (id, data) => {
   return axios.put(UPDATE_USER + id, data);
+};
+
+export const getCategory = () => {
+  return axios.get(GET_CATEGORY);
+};
+
+export const getCategoryBySubCategoryId = (id) => {
+  return axios.get(GET_SUB_CATEGORY_BY_CATEGORY_ID + id);
 };

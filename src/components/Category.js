@@ -1,39 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'reactstrap';
+import { getCategory } from '../services/Services';
+import AddCategoryModel from './AddCategoryModal';
 
-const Example = (props) => {
+const Category = () => {
+  const [list_category, setProducts] = useState([]);
+  const [addCategorySucess, setCategorySucess] = useState(false);
+
+  console.log(list_category);
+
+  const getAllCategory = async () => {
+    const data = await getCategory();
+    setProducts(data.data);
+  };
+
+  useEffect(() => {
+    getAllCategory();
+  }, [addCategorySucess]);
+
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </Table>
+    <>
+      <AddCategoryModel setCategorySucess={setCategorySucess} />
+      <Table bordered variant="dark">
+        <thead>
+          <tr>
+            <th>Category Id</th>
+            <th>Category Name</th>
+            <th>Category Code</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list_category.map((category, i) => (
+            <tr key={i}>
+              <td>{category.categoryId}</td>
+              <td>{category.categoryName}</td>
+              <td>{category.categoryCode}</td>
+              <td
+                style={{
+                  justifyContent: 'space-evenly'
+                }}
+              >
+                <i class="fa fa-trash"></i> <i class="fa fa-pencil"></i>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
   );
-}
+};
 
-export default Example;
+export default Category;

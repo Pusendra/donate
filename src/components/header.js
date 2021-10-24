@@ -8,17 +8,17 @@ export default function Header() {
 
   return (
     <nav className="nav-bar">
-      <div className="logo">Rayes.</div>
+      <div className="logo">donateKaro</div>
       <ul>
         <Link to="/">
           <li>Home</li>
         </Link>
-        <Link to="/">
+        {/* <Link to="/">
           {' '}
           <li>Our Products</li>
-        </Link>
-        <li>About Us</li>
-        <li>Contact</li>
+        </Link> */}
+        {/* <li>About Us</li>
+        <li>Contact</li> */}
         {data?.id && (
           <Link to="/profile/products">
             <li>Profile</li>
