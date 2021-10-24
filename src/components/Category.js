@@ -55,7 +55,6 @@ const Category = () => {
                   justifyContent: 'space-evenly'
                 }}
               >
-                <i class="fa fa-trash"></i>{' '}
                 <i
                   class="fa fa-pencil"
                   onClick={() => {
