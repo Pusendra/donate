@@ -11,6 +11,7 @@ import SubCategory from './SubCategory';
 import AddProducts from './AddProducts';
 import AddCategoryModel from './AddCategoryModal';
 import LogOut from './LogOut';
+import Users from './Users';
 
 const Profile = () => {
   let history = useHistory();
@@ -31,8 +32,8 @@ const Profile = () => {
   const [settings, setSettings] = useState(
     history.location.pathname === '/profile/settings'
   );
-  const [about, setAbout] = useState(
-    history.location.pathname === '/profile/about'
+  const [users, setAbout] = useState(
+    history.location.pathname === '/profile/users'
   );
 
   const handleProducts = () => {
@@ -120,21 +121,23 @@ const Profile = () => {
             <h4>{data.firstName || 'Anonyms'}</h4>
           </div>
           <ul>
-            <Link to={`/profile/products`}>
-              <li
-                className={`profile-list ${
-                  products && 'profile-active-background'
-                } `}
-                onClick={handleProducts}
-              >
-                <i className="fa fa-desktop" aria-hidden="true"></i>
-                {data.typeName === 'user' ? (
+            {data.typeName === 'user' || data.typeName === 'superadmin' ? (
+              <Link to={`/profile/products`}>
+                <li
+                  className={`profile-list ${
+                    products && 'profile-active-background'
+                  } `}
+                  onClick={handleProducts}
+                >
+                  <i className="fa fa-product-hunt" aria-hidden="true"></i>
+
                   <span>My Products</span>
-                ) : (
-                  <span>All Products</span>
-                )}
-              </li>
-            </Link>
+                </li>
+              </Link>
+            ) : (
+              <span></span>
+            )}
+
             <Link to={`/profile/add-products`}>
               <li
                 className={`profile-list ${
@@ -142,44 +145,57 @@ const Profile = () => {
                 } `}
                 onClick={handleAddProducts}
               >
-                <i className="fa fa-desktop" aria-hidden="true"></i>
+                <i className="fa fa-plus" aria-hidden="true"></i>
 
                 <span>Add Products</span>
               </li>
             </Link>
-            <Link to="/profile/category">
-              <li
-                className={`profile-list ${
-                  category && 'profile-active-background'
-                } `}
-                onClick={handleCategory}
-              >
-                <i className="fa fa-envelope-o" aria-hidden="true"></i>
-                <span>Categories</span>
-              </li>
-            </Link>
-            <Link to="/profile/subcategory">
-              <li
-                className={`profile-list ${
-                  subCategory && 'profile-active-background'
-                } `}
-                onClick={handleSubCategory}
-              >
-                <i className="fa fa-comment-o" aria-hidden="true"></i>
-                <span>Sub Category</span>
-              </li>
-            </Link>
-            <Link to="/profile/about">
-              <li
-                className={`profile-list ${
-                  about && 'profile-active-background'
-                } `}
-                onClick={handleAbout}
-              >
-                <i className="fa fa-info-circle" aria-hidden="true"></i>
-                <span>About</span>
-              </li>
-            </Link>
+
+            {data.typeName === 'superadmin' ? (
+              <Link to="/profile/category">
+                <li
+                  className={`profile-list ${
+                    category && 'profile-active-background'
+                  } `}
+                  onClick={handleCategory}
+                >
+                  <span>Categories</span>
+                </li>
+              </Link>
+            ) : (
+              <span></span>
+            )}
+
+            {data.typeName === 'superadmin' ? (
+              <Link to="/profile/subcategory">
+                <li
+                  className={`profile-list ${
+                    subCategory && 'profile-active-background'
+                  } `}
+                  onClick={handleSubCategory}
+                >
+                  <span>Sub Category</span>
+                </li>
+              </Link>
+            ) : (
+              <span></span>
+            )}
+
+            {data.typeName === 'superadmin' ? (
+              <Link to="/profile/users">
+                <li
+                  className={`profile-list ${
+                    users && 'profile-active-background'
+                  } `}
+                  onClick={handleAbout}
+                >
+                  <i className="fa fa-users" aria-hidden="true"></i>
+                  <span>Users</span>
+                </li>
+              </Link>
+            ) : (
+              <span></span>
+            )}
             <Link to="/profile/settings">
               <li
                 className={`profile-list ${
@@ -205,12 +221,13 @@ const Profile = () => {
               path="/profile/products"
             />
           )}
+
           {addProducts && <AddProducts />}
           {category && <Category />}
           {settings && <EditProfile />}
-          {about && (
+          {users && (
             <p>
-              <AddCategoryModel />
+              <Users />
             </p>
           )}
           {subCategory && <SubCategory />}

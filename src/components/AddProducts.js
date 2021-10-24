@@ -42,6 +42,9 @@ const AddProducts = () => {
     setSubCategory(data.data);
   };
 
+  console.log(getCategoryId);
+  console.log(list_sub_category);
+
   useEffect(() => {
     getSubCategoryByCatgoryId();
   }, [getCategoryId]);

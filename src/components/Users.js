@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'reactstrap';
 import { getUsers } from '../services/Services';
-// import AddSubCategoryModel from './';
 
 const Users = () => {
   const [list_users, setUsers] = useState([]);
@@ -28,23 +27,20 @@ const Users = () => {
             <th>Last Name</th>
             <th>Email</th>
             <th>Mobile</th>
+            <th>Address</th>
+            <th>TypeName</th>
           </tr>
         </thead>
         <tbody>
-          {list_users.map((users, i) => (
+          {list_users.map((u, i) => (
             <tr key={i}>
-              <td>{i}</td>
-              <td>{users.firstName}</td>
-              <td>{users.lastName}</td>
-              <td>{users.email}</td>
-              <td>{users.mobile}</td>
-              <td
-                style={{
-                  justifyContent: 'space-evenly'
-                }}
-              >
-                <i class="fa fa-trash"></i> <i class="fa fa-pencil"></i>
-              </td>
+              <td>{i + 1}</td>
+              <td>{u.firstName}</td>
+              <td>{u.lastName}</td>
+              <td>{u.email}</td>
+              <td>{u.mobile}</td>
+              <td>{u.address}</td>
+              <td>{u.typeName}</td>
             </tr>
           ))}
         </tbody>
