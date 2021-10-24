@@ -10,7 +10,8 @@ import {
   REGISTERATION,
   UPDATE_USER,
   GET_CATEGORY,
-  GET_SUB_CATEGORY_BY_CATEGORY_ID
+  GET_SUB_CATEGORY_BY_CATEGORY_ID,
+  GET_SUB_CATEGORY
 } from '../constants/URLS.CONSTANT';
 
 export const registerUser = (data) => {
@@ -55,4 +56,8 @@ export const getCategory = () => {
 
 export const getCategoryBySubCategoryId = (id) => {
   return axios.get(GET_SUB_CATEGORY_BY_CATEGORY_ID + id);
+};
+
+export const getSubCategory = () => {
+  return axios.get(GET_SUB_CATEGORY);
 };

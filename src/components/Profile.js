@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import EditProfile from './EditProfile';
 import { getProductsByUser } from '../services/Services';
 import Category from './Category';
+import SubCategory from './SubCategory';
 import AddProducts from './AddProducts';
 import AddCategoryModel from './AddCategoryModal';
 
@@ -211,7 +212,7 @@ const Profile = () => {
               <AddCategoryModel />
             </p>
           )}
-          {subCategory && <p>Sub Category</p>}
+          {subCategory && <SubCategory />}
         </section>
       </div>
     </>

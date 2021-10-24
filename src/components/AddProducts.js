@@ -15,6 +15,9 @@ const AddProducts = () => {
   const { data } = useLoginContext();
   const [selectedFile, setSelectedFile] = useState(null);
   const [list_category, setCategory] = useState([]);
+  const [getCategoryId, setCategoryId] = useState({
+    categoryId: ''
+  });
   const [list_sub_category, setSubCategory] = useState([]);
   const [productData, setProductData] = useState({
     productName: '',
@@ -35,15 +38,17 @@ const AddProducts = () => {
   }, []);
 
   const getSubCategoryByCatgoryId = async () => {
-    const data = await getCategoryBySubCategoryId(1);
+    const data = await getCategoryBySubCategoryId(getCategoryId.categoryId);
     setSubCategory(data.data);
   };
 
   useEffect(() => {
     getSubCategoryByCatgoryId();
-  }, []);
+  }, [getCategoryId]);
 
   console.log(list_sub_category);
+
+  console.log(getCategoryId);
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
@@ -78,13 +83,18 @@ const AddProducts = () => {
     setProductData({ ...productData, [name]: value });
   };
 
+  const handCatgeoryId = (e) => {
+    const { name, value } = e.target;
+    setCategoryId({ ...getCategoryId, [name]: value });
+  };
+
   return (
     <form className="my-form" onSubmit={handleUpdateProfile}>
       <div className="edit-container">
         <h1>Add Product</h1>
         <ul>
           <li>
-            <div className="grid grid-2">
+            <div className="grid grid-12">
               <div>
                 <label htmlFor="productName">Product Name</label>
                 <input
@@ -95,17 +105,6 @@ const AddProducts = () => {
                   value={productData.productName}
                 />
               </div>
-              <div>
-                <label htmlFor="address">Sub Category</label>
-                <input
-                  type="text"
-                  placeholder="Enter Sub Category"
-                  onChange={handleDataChange}
-                  name="subCategoryId"
-                  value={productData.subCategoryId}
-                />
-              </div>
-              list_category
             </div>
           </li>
 
@@ -113,7 +112,8 @@ const AddProducts = () => {
             <div className="grid grid-2">
               <div>
                 <label htmlFor="category">Category</label>
-                <select onChange={handleDataChange} name="category">
+                <select onChange={handCatgeoryId} name="categoryId">
+                  <option> ---Select Category--- </option>
                   {list_category.map((category, i) => (
                     <option key={i} value={category.categoryId}>
                       {category.categoryName}
@@ -121,15 +121,17 @@ const AddProducts = () => {
                   ))}
                 </select>
               </div>
+
               <div>
-                <label htmlFor="phone">Product Price</label>
-                <input
-                  type="text"
-                  placeholder="Enter Product Price"
-                  onChange={handleDataChange}
-                  name="productPrice"
-                  value={productData.productPrice}
-                />
+                <label htmlFor="subCategory">Sub Category</label>
+                <select onChange={handleDataChange} name="subCategoryId">
+                  <option> ---Select Sub Category--- </option>
+                  {list_sub_category.map((subCategory, i) => (
+                    <option key={i} value={subCategory.subCategoryId}>
+                      {subCategory.subCategoryName}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </li>
